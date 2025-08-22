@@ -23,11 +23,11 @@
       "talkTimeRatio": 0.55,
       "questionsAsked": 8,
       "sentimentScore": 0.6,
-      "notes": "Needs to discuss with team. Follow up next week."
+      "notes": "Needs to discuss with team. Follow up next week.",
       "tags": ["mid-market", "follow-up"]
     },
     {
-      "id": "call_003"
+      "id": "call_003",
       "prospectName": "Mike Chen",
       "date": "2024-08-13T09:00:00Z",
       "duration": "900",
@@ -37,7 +37,7 @@
       "questionsAsked": 5,
       "sentimentScore": 0.3,
       "notes": "Budget too small for our platform. Referred to competitor.",
-      "tags": ["small-business", "budget-constraint",]
+      "tags": ["small-business", "budget-constraint"]
     },
     {
       "id": "call_004",
@@ -51,7 +51,7 @@
       "sentimentScore": 0.9,
       "notes": "Signed annual contract! Very excited about implementation.",
       "tags": ["enterprise", "closed-won", "annual-contract"]
-    }
+    },
     {
       "id": "call_005",
       "prospectName": "David Wilson",

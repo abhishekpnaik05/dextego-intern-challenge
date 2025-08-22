@@ -59,7 +59,7 @@ export default function Dashboard() {
             <Phone className="h-8 w-8 text-blue-600" />
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600 dark:text-gray-300">Total Calls</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{totalCalls}</p>
+              <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalCalls}</p>
             </div>
           </div>
         </div>
