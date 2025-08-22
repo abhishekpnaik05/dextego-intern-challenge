@@ -83,8 +83,6 @@
 - Share functionality
 
 ![export Overview](./screenshots/export.png)
-
-![export Overview](./screenshots/export.png)
 ---
 
 
