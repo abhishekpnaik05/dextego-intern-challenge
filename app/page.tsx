@@ -1,3 +1,4 @@
+// pages/dashboard.tsx or app/dashboard/page.tsx
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -5,10 +6,12 @@ import { Call, ApiResponse } from '../lib/types'
 import { CallCard } from '../components/CallCard'
 import { LoadingSpinner } from '../components/LoadingSpinner'
 import { ErrorMessage } from '../components/ErrorMessage'
+import { SearchAndFilter } from '../components/SearchAndFilter'
 import { BarChart3, TrendingUp, Users, Phone } from 'lucide-react'
 
 export default function Dashboard() {
-  const [calls, setCalls] = useState<Call[]>([])
+  const [allCalls, setAllCalls] = useState<Call[]>([])
+  const [filteredCalls, setFilteredCalls] = useState<Call[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -22,7 +25,8 @@ export default function Dashboard() {
       const data: ApiResponse<Call[]> = await response.json()
       
       if (data.success) {
-        setCalls(data.data)
+        setAllCalls(data.data)
+        setFilteredCalls(data.data) // Initially show all calls
       } else {
         setError(data.error || 'Failed to fetch calls')
       }
@@ -33,11 +37,16 @@ export default function Dashboard() {
     }
   }
 
+  const handleFilteredCalls = (filtered: Call[]) => {
+    setFilteredCalls(filtered)
+  }
+
+  // Calculate stats based on filtered calls
   const stats = {
-    totalCalls: calls.length,
-    avgDuration: calls.reduce((acc, call) => acc + call.duration, 0) / calls.length / 60,
-    qualifiedRate: (calls.filter(call => call.outcome === 'qualified' || call.outcome === 'closed-won').length / calls.length) * 100,
-    avgSentiment: calls.reduce((acc, call) => acc + call.sentimentScore, 0) / calls.length
+    totalCalls: filteredCalls.length,
+    avgDuration: filteredCalls.reduce((acc, call) => acc + call.duration, 0) / filteredCalls.length / 60,
+    qualifiedRate: (filteredCalls.filter(call => call.outcome === 'qualified' || call.outcome === 'closed-won').length / filteredCalls.length) * 100,
+    avgSentiment: filteredCalls.reduce((acc, call) => acc + call.sentimentScore, 0) / filteredCalls.length
   }
 
   if (loading) return <LoadingSpinner />
@@ -57,9 +66,15 @@ export default function Dashboard() {
         </p>
       </div>
 
+      {/* Search and Filter */}
+      <SearchAndFilter 
+        calls={allCalls} 
+        onFilteredCalls={handleFilteredCalls} 
+      />
+
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {/* Card */}
+        {/* Stats cards remain the same but now use filteredCalls data */}
         <div
           className="rounded-lg border p-6"
           style={{
@@ -141,14 +156,20 @@ export default function Dashboard() {
           className="text-2xl font-bold mb-6"
           style={{ color: "rgb(var(--foreground))" }}
         >
-          Recent Calls
+          {filteredCalls.length === allCalls.length ? 'Recent Calls' : 'Filtered Results'}
         </h2>
         
         {error ? (
           <ErrorMessage message={error} />
+        ) : filteredCalls.length === 0 ? (
+          <div className="text-center py-12">
+            <p style={{ color: "rgb(var(--foreground))" }}>
+              No calls match your search criteria
+            </p>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {calls.slice(0, 6).map((call) => (
+            {filteredCalls.slice(0, 12).map((call) => (
               <CallCard key={call.id} call={call} />
             ))}
           </div>
