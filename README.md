@@ -82,11 +82,13 @@
 - Generate PDF summaries
 - Share functionality
 
+![export Overview](./screenshots/export.png)
+
 ---
 
 
 ### 🔍 **Advanced Filtering System**
-- Filter by customer name
+- Filter by status
 - Filter by date range
 - Filter by call outcome
 - Filter by duration
@@ -105,7 +107,6 @@
 
 ## ⏱️ Time Invested
 **Total Development Time:** ~4-5 hours
-
 
 ---
 
