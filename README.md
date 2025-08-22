@@ -104,10 +104,8 @@
 ---
 
 ## ⏱️ Time Invested
-**Total Development Time:** ~40 hours
-- Bug fixing: 14 hours
-- Feature implementation: 22 hours  
-- Testing & optimization: 4 hours
+**Total Development Time:** ~4-5 hours
+
 
 ---
 
